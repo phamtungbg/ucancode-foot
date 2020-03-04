@@ -8,12 +8,12 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     function sanPham() {
-        echo 'Sản phẩm';
+        return view('backend.product.listproduct');
     }
     function themSanPham() {
-        echo 'Thêm sản phẩm';
+        return view('backend.product.addproduct');
     }
     function suaSanPham() {
-        echo 'Sửa sản phẩm';
+        return view('backend.product.addproduct');
     }
 }

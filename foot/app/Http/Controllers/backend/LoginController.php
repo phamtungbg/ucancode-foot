@@ -8,6 +8,6 @@ use Illuminate\Http\Request;
 class LoginController extends Controller
 {
     function dangNhap() {
-        echo 'đăng nhập';
+        return view('backend.login.login');
     }
 }

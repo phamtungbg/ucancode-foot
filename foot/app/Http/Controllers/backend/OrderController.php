@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 class OrderController extends Controller
 {
     function donHang() {
-        echo 'Đơn hàng';
+        return view('backend.order.order');
     }
     function ctDonHang() {
-        echo 'Chi tiết đơn hàng';
+        return view('backend.order.detailorder');
     }
 }

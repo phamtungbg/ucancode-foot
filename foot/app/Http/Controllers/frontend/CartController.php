@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 class CartController extends Controller
 {
     function gioHang() {
-        echo 'Giỏ hàng';
+        return view('frontend.cart.cart');
     }
     function thanhToan() {
-        echo 'Thanh toán';
+        return view('frontend.cart.checkout');
     }
 }

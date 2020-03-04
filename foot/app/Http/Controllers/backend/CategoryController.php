@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     function danhMuc() {
-        echo 'Danh mục';
+        return view('backend.category.category');
     }
     function suaDanhMuc() {
-        echo 'Sửa danh mục';
+        return view('backend.category.editcategory');
     }
 }

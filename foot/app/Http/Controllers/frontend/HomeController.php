@@ -8,12 +8,12 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     function trangChu() {
-        echo 'Trang chủ';
+        return view('frontend.index');
     }
     function thongTin() {
-        echo 'Thông tin';
+        return view('frontend.about');
     }
     function lienHe() {
-        echo 'Liên hệ';
+        return view('frontend.contact');
     }
 }

@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 class BlogController extends Controller
 {
     function tinTuc() {
-        echo 'Tin tức';
+        return view('frontend.blog.blog');
     }
     function ctTinTuc() {
-        echo 'Chi tiết tin tức';
+        return view('frontend.blog.blog-single');
     }
 }
