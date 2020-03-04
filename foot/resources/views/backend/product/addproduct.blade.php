@@ -14,6 +14,8 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">Thêm sản phẩm</div>
                 <div class="panel-body">
+                    <form action="" method="post" enctype="multipart/form-data">
+                        @csrf
                     <div class="row" style="margin-bottom:40px">
 
                                 <div class="col-md-8">
@@ -31,14 +33,17 @@
                                     <div class="form-group">
                                         <label>Tên sản phẩm</label>
                                         <input type="text" name="ten" class="form-control">
+                                        {{hienLoi($errors,'ten')}}
                                     </div>
                                     <div class="form-group">
                                         <label>Giá sản phẩm</label>
                                         <input type="number" name="gia" class="form-control">
+                                        {{hienLoi($errors,'gia')}}
                                     </div>
                                     <div class="form-group">
                                         <label>Số lượng</label>
                                         <input type="number" name="so_luong" class="form-control">
+                                        {{hienLoi($errors,'so_luong')}}
                                     </div>
                                     <div class="form-group">
                                         <label>Mức giảm giá</label>
@@ -59,6 +64,7 @@
                                         <input id="img" type="file" name="anh" class="form-control hidden"
                                             onchange="changeImg(this)">
                                         <img id="avatar" class="thumbnail" width="100%" height="350px" src="upload/import-img.png">
+                                        {{hienLoi($errors,'anh')}}
                                     </div>
                                 </div>
 
@@ -74,6 +80,7 @@
                                 <button class="btn btn-danger" type="reset">Huỷ bỏ</button>
                             </div>
                         </div>
+                    </form>
                     <div class="clearfix"></div>
                 </div>
             </div>

@@ -13,6 +13,8 @@
         <div class="col-xs-6 col-md-12 col-lg-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">Sửa tin tức</div>
+                <form action="" method="post" enctype="multipart/form-data">
+                    @csrf
                 <div class="panel-body">
                     <div class="row" style="margin-bottom:40px">
                         <div class="col-md-8">
@@ -29,6 +31,7 @@
                                 <label>Tiêu đề</label>
                                 <input type="text" name="tieu_de" class="form-control"
                                     value="Những trái hoa quả tốt cho sức khỏe">
+                                    {{hienLoi($errors,'tieu_de')}}
                             </div>
                             <div class="form-group">
                                 <label>Tags</label>
@@ -44,10 +47,11 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Ảnh tin tức</label>
-                                <input id="img" type="file" name="img" class="form-control hidden"
+                                <input id="img" type="file" name="anh" class="form-control hidden"
                                     onchange="changeImg(this)">
                                 <img id="avatar" class="thumbnail" width="100%" height="325px"
                                     src="upload/import-img.png">
+                                    {{hienLoi($errors,'anh')}}
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -67,6 +71,7 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
+            </form>
             </div>
 
         </div>

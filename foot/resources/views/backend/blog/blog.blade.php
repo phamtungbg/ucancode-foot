@@ -28,7 +28,7 @@
                 <div class="panel-body">
                     <div class="bootstrap-table">
                         <div class="table-responsive">
-                            <a href="addproduct.html" class="btn btn-primary">Thêm tin tức</a>
+                            <a href="/admin/blog/add" class="btn btn-primary">Thêm tin tức</a>
                             <div class="alert bg-success" role="alert">
                                 <svg class="glyph stroked checkmark">
                                     <use xlink:href="#stroked-checkmark"></use>
@@ -37,7 +37,7 @@
                             </div>
 
 
-                            <form method="POST">
+                            <form method="get">
                                 <div class="row">
                                     <div class="col-md-5">
                                         <div class="form-group">

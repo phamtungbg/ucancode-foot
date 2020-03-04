@@ -17,21 +17,24 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-xl-7 ftco-animate">
-                <form action="#" class="billing-form">
+                <form action="" method="POST" class="billing-form">
+                    @csrf
                     <h3 class="mb-4 billing-heading">Thông tin thanh toán</h3>
                     <div class="row align-items-end">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="firstname">Họ và tên</label>
-                                <input type="text" class="form-control" placeholder="VD:Nguyễn Thế Phúc">
+                                <input type="text" name="ho_ten" class="form-control" placeholder="VD:Nguyễn Thế Phúc">
+                                {{hienLoi($errors,'ho_ten')}}
                             </div>
                         </div>
                         <div class="w-100"></div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="streetaddress">Địa chỉ</label>
-                                <input type="text" class="form-control"
+                                <input type="text" name="dia_chi" class="form-control"
                                     placeholder="VD: Dũng tiến - Thường Tín - Hà Nội">
+                                    {{hienLoi($errors,'dia_chi')}}
                             </div>
                         </div>
 
@@ -39,18 +42,20 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="phone">Phone</label>
-                                <input type="text" class="form-control" placeholder="VD:0356653300">
+                                <input type="text" name="dien_thoai" class="form-control" placeholder="VD:0356653300">
+                                {{hienLoi($errors,'dien_thoai')}}
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="emailaddress">Email Address</label>
-                                <input type="text" class="form-control" placeholder="">
+                                <input type="text" name="email" class="form-control" placeholder="">
+                                {{hienLoi($errors,'email')}}
                             </div>
                         </div>
 
                     </div>
-                </form><!-- END -->
+               <!-- END -->
             </div>
             <div class="col-xl-5">
                 <div class="row mt-5 pt-3">
@@ -70,13 +75,14 @@
                                 <span>Tổng tiền</span>
                                 <span>$17.60</span>
                             </p>
-                            <p><a href="#" class="btn btn-primary py-3 px-4">Place an order</a></p>
+                            <p><button type="submit" class="btn btn-primary py-3 px-4">Place an order</button></p>
                         </div>
 
                     </div>
 
                 </div>
             </div> <!-- .col-md-8 -->
+        </form>
         </div>
     </div>
 </section> <!-- .section -->

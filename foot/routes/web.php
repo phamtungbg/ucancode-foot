@@ -37,14 +37,14 @@ Route::group(['prefix' => 'shop'], function () {
 Route::group(['prefix' => 'cart'], function () {
     Route::get('','frontend\CartController@gioHang');
     Route::get('checkout', 'frontend\CartController@thanhToan');
-
+    Route::post('checkout', 'frontend\CartController@postThanhToan');
 });
 
 
 //BACKEND
 //login
 Route::get('login','backend\LoginController@dangNhap' );
-
+Route::post('login','backend\LoginController@postDangNhap' );
 //admin
 Route::group(['prefix' => 'admin'], function () {
     Route::get('', 'backend\IndexController@admin');
@@ -52,21 +52,27 @@ Route::group(['prefix' => 'admin'], function () {
     //category
     Route::group(['prefix' => 'category'], function () {
         Route::get('', 'backend\CategoryController@danhMuc');
+        Route::post('', 'backend\CategoryController@postThemDanhMuc');
         Route::get('edit', 'backend\CategoryController@suaDanhMuc');
+        Route::post('edit', 'backend\CategoryController@postSuaDanhMuc');
     });
 
     //product
     Route::group(['prefix' => 'product'], function () {
         Route::get('', 'backend\ProductController@sanPham');
         Route::get('add', 'backend\ProductController@themSanPham');
+        Route::post('add', 'backend\ProductController@postThemSanPham');
         Route::get('edit', 'backend\ProductController@suaSanPham');
+        Route::post('edit', 'backend\ProductController@postSuaSanPham');
     });
 
     //blog
     Route::group(['prefix' => 'blog'], function () {
         Route::get('', 'backend\BlogController@tinTuc');
         Route::get('add', 'backend\BlogController@themTinTuc');
+        Route::post('add', 'backend\BlogController@postThemTinTuc');
         Route::get('edit', 'backend\BlogController@suaTinTuc');
+        Route::post('edit', 'backend\BlogController@postSuaTinTuc');
     });
 
     //order
