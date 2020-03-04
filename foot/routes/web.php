@@ -43,10 +43,11 @@ Route::group(['prefix' => 'cart'], function () {
 
 //BACKEND
 //login
-Route::get('login','backend\LoginController@dangNhap' );
-Route::post('login','backend\LoginController@postDangNhap' );
+Route::get('login','backend\LoginController@dangNhap')->middleware('CheckLogout');
+Route::post('login','backend\LoginController@postDangNhap');
+Route::get('logout','backend\LoginController@dangXuat');
 //admin
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin','middleware'=>'CheckLogin'], function () {
     Route::get('', 'backend\IndexController@admin');
 
     //category
