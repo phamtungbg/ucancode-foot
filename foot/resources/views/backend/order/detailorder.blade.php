@@ -26,10 +26,10 @@
                                         <div class="panel panel-blue">
                                             <div class="panel-heading dark-overlay">Thông tin khách hàng</div>
                                             <div class="panel-body">
-                                                <strong><span class="glyphicon glyphicon-user" aria-hidden="true"></span> : Nguyễn thế phúc</strong> <br>
-                                                <strong><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> : Số điện thoại: 0356653300</strong>
+                                                <strong><span class="glyphicon glyphicon-user" aria-hidden="true"></span> : {{$donHang->ho_ten}}</strong> <br>
+                                                <strong><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> : Số điện thoại: {{$donHang->dien_thoai}}</strong>
                                                 <br>
-                                                <strong><span class="glyphicon glyphicon-send" aria-hidden="true"></span> : Thường tín</strong>
+                                                <strong><span class="glyphicon glyphicon-send" aria-hidden="true"></span> : {{$donHang->dia_chi}}</strong>
                                             </div>
                                         </div>
                                     </div>
@@ -48,40 +48,27 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($donHang->ctDonHang as $item)
                                     <tr>
-                                        <td>1</td>
+                                        <td>{{$item->id}}</td>
                                         <td>
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <img width="100px" src="upload/dau-tay-1.jpg" class="thumbnail">
+                                                <img width="100px" src="/backend/{{$item->ct_link_anh}}" class="thumbnail">
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <p><b>Tên Sản phẩm</b>: Dâu tây</p>
-                                                    <p><b>Số lượng</b> : 2</p>
+                                                    <p><b>Tên Sản phẩm</b>: {{$item->ct_ten}}</p>
+                                                    <p><b>Số lượng</b> : {{$item->ct_so_luong_mua}}</p>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>50.000 VNĐ</td>
-                                        <td>100.000 VNĐ</td>
+                                        <td>{{number_format($item->ct_gia,0,'','.')}} VNĐ</td>
+                                        <td>{{number_format($item->ct_gia*$item->ct_so_luong_mua,0,'','.')}} VNĐ</td>
 
                                     </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <img width="100px" src="upload/dau-tay-1.jpg" class="thumbnail">
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <p><b>Tên Sản phẩm</b>: Dâu tây</p>
-                                                    <p><b>Số lượng</b> : 1</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>50.000 VNĐ</td>
-                                        <td>50.000 VNĐ</td>
 
-                                    </tr>
+                                    @endforeach
+
                                 </tbody>
 
                             </table>
@@ -92,33 +79,15 @@
                                             <h4 align='right'>Tổng Tiền :</h4>
                                         </th>
                                         <th>
-                                            <h4 align='right' style="color: brown;">150.000 VNĐ</h4>
+                                            <h4 align='right' style="color: brown;">{{number_format($donHang->tong_tien,0,'','.')}} VNĐ</h4>
                                         </th>
 
-                                    </tr>
-                                    <tr>
-                                        <th width='70%'>
-                                            <h4 align='right'>Mã giảm giá: NOEL NO854</h4>
-                                        </th>
-                                        <th>
-                                            <h4 align='right' style="color: brown;">15.000 VNĐ</h4>
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th width='70%'>
-                                            <h4 align='right'>Tổng :</h4>
-                                        </th>
-                                        <th>
-                                            <h4 align='right' style="color: brown;">135.000 VNĐ</h4>
-                                        </th>
-
-                                    </tr>
                                 </thead>
                                 <tbody>
                                 </tbody>
                             </table>
                             <div class="alert alert-primary" role="alert" align='right'>
-                                <a name="" id="" class="btn btn-success" href="#" role="button">Xác nhận</a>
+                                <a name="" id="" class="btn btn-success" href="/admin/order" role="button">Xác nhận</a>
                             </div>
                         </div>
                     </div>

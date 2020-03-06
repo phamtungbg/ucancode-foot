@@ -80,7 +80,7 @@ Route::group(['prefix' => 'admin','middleware'=>'CheckLogin'], function () {
     //order
     Route::group(['prefix' => 'order'], function () {
         Route::get('', 'backend\OrderController@donHang');
-        Route::get('detail', 'backend\OrderController@ctDonHang');
+        Route::get('detail/{idDonHang}', 'backend\OrderController@ctDonHang');
     });
 });
 

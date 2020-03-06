@@ -32,17 +32,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($donHang as $item)
                                     <tr>
-                                        <td>1</td>
-                                        <td>Nguyễn Thế Phúc</td>
-                                        <td>0356653300</td>
-                                        <td>Thường tín</td>
-                                        <td>100.000 VND</td>
+                                        <td>{{$item->id}}</td>
+                                        <td>{{$item->ho_ten}}</td>
+                                        <td>{{$item->dien_thoai}}</td>
+                                        <td>{{$item->dia_chi}}</td>
+                                        <td>{{number_format($item->tong_tien,0,'','.')}} VND</td>
                                         <td>
-                                            <a href="detailorder.html" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i>Chi tiết</a>
+                                            <a href="/admin/order/detail/{{$item->id}}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i>Chi tiết</a>
 
                                         </td>
                                     </tr>
+                                    @endforeach
+
                                 </tbody>
                             </table>
                         </div>
