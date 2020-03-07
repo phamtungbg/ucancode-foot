@@ -30,17 +30,17 @@
                             <div class="form-group">
                                 <label>Tiêu đề</label>
                                 <input type="text" name="tieu_de" class="form-control"
-                                    value="Những trái hoa quả tốt cho sức khỏe">
+                                    value="{{$tinTuc->tieu_de}}">
                                     {{hienLoi($errors,'tieu_de')}}
                             </div>
                             <div class="form-group">
                                 <label>Tags</label>
-                                <input type="text" name="the_tag" class="form-control" value="">
+                                <input type="text" name="the_tag" class="form-control" value="{{$tinTuc->the_tag}}">
                             </div>
                             <div class="form-group">
                                 <label>Mô tả</label>
                                 <textarea name="mo_ta"
-                                    style="width: 100%;height: 100px;">Đằng sau những ngọn núi, nơi chứa những sản phẩm tốt</textarea>
+                                    style="width: 100%;height: 100px;">{{$tinTuc->mo_ta}}</textarea>
                             </div>
 
                         </div>
@@ -50,15 +50,14 @@
                                 <input id="img" type="file" name="anh" class="form-control hidden"
                                     onchange="changeImg(this)">
                                 <img id="avatar" class="thumbnail" width="100%" height="325px"
-                                    src="upload/import-img.png">
+                                    src="{{$tinTuc->link_anh}}">
                                     {{hienLoi($errors,'anh')}}
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Nội dung</label>
-                                <textarea name="noi_dung" style="width: 100%;height: 500px;">Chà là tên khoa học là Phoenix Dactylifera, một giống cây thân cọ ưa nước, cho quả chín già màu đỏ nhạt, có nơi có quả đen kết thành từng chùm.
-                                            </textarea>
+                                <textarea name="noi_dung" style="width: 100%;height: 500px;">{{$tinTuc->noi_dung}} </textarea>
                             </div>
                         </div>
 

@@ -89,7 +89,9 @@ class ProductController extends Controller
     //xoa sp
     function xoaSanPham($idSp){
         $sanPham = san_pham::find($idSp);
-        unlink('backend/'.$sanPham->link_anh);
+        if ($sanPham->link_anh!='no-img.jpg') {
+            unlink('backend/'.$sanPham->link_anh);
+        }
         $sanPham->delete();
         return redirect('/admin/product')->with('thongbao','Đã xóa thành công');
     }

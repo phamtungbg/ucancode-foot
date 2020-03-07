@@ -73,8 +73,9 @@ Route::group(['prefix' => 'admin','middleware'=>'CheckLogin'], function () {
         Route::get('', 'backend\BlogController@tinTuc');
         Route::get('add', 'backend\BlogController@themTinTuc');
         Route::post('add', 'backend\BlogController@postThemTinTuc');
-        Route::get('edit', 'backend\BlogController@suaTinTuc');
-        Route::post('edit', 'backend\BlogController@postSuaTinTuc');
+        Route::get('edit/{idTin}', 'backend\BlogController@suaTinTuc');
+        Route::post('edit/{idTin}', 'backend\BlogController@postSuaTinTuc');
+        Route::get('del/{idTin}', 'backend\BlogController@xoaTinTuc');
     });
 
     //order

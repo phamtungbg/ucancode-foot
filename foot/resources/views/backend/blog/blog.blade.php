@@ -29,14 +29,14 @@
                     <div class="bootstrap-table">
                         <div class="table-responsive">
                             <a href="/admin/blog/add" class="btn btn-primary">Thêm tin tức</a>
+                            @if (session('thongBao'))
                             <div class="alert bg-success" role="alert">
                                 <svg class="glyph stroked checkmark">
                                     <use xlink:href="#stroked-checkmark"></use>
-                                </svg>Đã thêm thành công<a href="#" class="pull-right"><span
+                                </svg>{{session('thongBao')}}<a href="#" class="pull-right"><span
                                         class="glyphicon glyphicon-remove"></span></a>
                             </div>
-
-
+                            @endif
                             <form method="get">
                                 <div class="row">
                                     <div class="col-md-5">
@@ -69,50 +69,32 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
+                                    @foreach ($tinTuc as $item)
+                                        <tr>
+                                        <td>{{$item->id}}</td>
                                         <td>
                                             <div class="row">
-                                                <div class="col-md-3"><img src="upload/dau-tay-1.jpg" alt="Áo đẹp"
+                                                <div class="col-md-3"><img src="/backend/{{$item->link_anh}}" alt="Áo đẹp"
                                                         width="100px" class="thumbnail"></div>
                                                 <div class="col-md-9">
-                                                    <p> <strong>Những trái hoa quả tốt cho sức khỏe</strong> </p>
-                                                    <p>Đằng sau những ngọn núi, nơi chứa những sản phẩm tốt</p>
+                                                    <p> <strong>{{$item->tieu_de}}</strong> </p>
+                                                    <p>{{$item->mieu_ta}}</p>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>Trái cây</td>
-                                        <td>Admin</td>
-                                        <td>3-3-2020</td>
+                                        <td>{{$item->danhMuc->ten}}</td>
+                                        <td>{{$item->thanhVien->ten}}</td>
+                                        <td>{{$item->created_at}}</td>
                                         <td>
-                                            <a href="#" class="btn btn-warning"><i class="fa fa-pencil"
+                                        <a href="/admin/blog/edit/{{$item->id}}" class="btn btn-warning"><i class="fa fa-pencil"
                                                     aria-hidden="true"></i> Sửa</a>
-                                            <a href="#" class="btn btn-danger"><i class="fa fa-trash"
+                                            <a onclick="return hoiXoa('{{$item->tieu_de}}')" href="/admin/blog/del/{{$item->id}}" class="btn btn-danger"><i class="fa fa-trash"
                                                     aria-hidden="true"></i> Xóa</a>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>
-                                            <div class="row">
-                                                <div class="col-md-3"><img src="upload/dau-tay-1.jpg" alt="Áo đẹp"
-                                                        width="100px" class="thumbnail"></div>
-                                                <div class="col-md-9">
-                                                    <p> <strong>Những trái hoa quả tốt cho sức khỏe</strong> </p>
-                                                    <p>Đằng sau những ngọn núi, nơi chứa những sản phẩm tốt</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>Trái cây</td>
-                                        <td>Admin</td>
-                                        <td>3-3-2020</td>
-                                        <td>
-                                            <a href="#" class="btn btn-warning"><i class="fa fa-pencil"
-                                                    aria-hidden="true"></i> Sửa</a>
-                                            <a href="#" class="btn btn-danger"><i class="fa fa-trash"
-                                                    aria-hidden="true"></i> Xóa</a>
-                                        </td>
-                                    </tr>
+                                    @endforeach
+
+
                                 </tbody>
                             </table>
                             <div align='right'>
@@ -139,4 +121,9 @@
 @endsection
 @section('script')
     @parent
+    <script>
+        function hoiXoa(tieu_de){
+            return confirm('Bạn có muốn xóa tin tức '+tieu_de+' này không ?');
+        }
+    </script>
 @endsection
