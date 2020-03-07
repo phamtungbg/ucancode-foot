@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class tin_tuc extends Model
 {
     protected $table = 'tin_tuc';
-    public $timestamps = false;
 
     public function thanhVien()
     {

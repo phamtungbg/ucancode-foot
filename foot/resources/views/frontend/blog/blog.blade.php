@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
-                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Trang chủ</a></span> <span>Tin
+                <p class="breadcrumbs"><span class="mr-2"><a href="/">Trang chủ</a></span> <span>Tin
                         tức</span></p>
                 <h1 class="mb-0 bread">Tin tức</h1>
             </div>
@@ -19,164 +19,65 @@
         <div class="row">
             <div class="col-lg-8 ftco-animate">
                 <div class="row">
+                    @foreach ($tinTuc as $item)
                     <div class="col-md-12 d-flex ftco-animate">
                         <div class="blog-entry align-self-stretch d-md-flex">
-                            <a href="blog-single.html" class="block-20"
-                                style="background-image: url('images/image_1.jpg');">
+                            <a href="/blog/{{$item->link_slug}}-{{$item->id}}/{{$item->danh_muc_id}}" class="block-20"
+                        style="background-image: url('/backend/{{$item->link_anh}}');">
                             </a>
                             <div class="text d-block pl-md-4">
                                 <div class="meta mb-3">
-                                    <div><a href="#">July 20, 2019</a></div>
-                                    <div><a href="#">Admin</a></div>
-                                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+                                    <div><a href="/blog/{{$item->link_slug}}-{{$item->id}}/{{$item->danh_muc_id}}">{{$item->created_at->format('M-d-Y')}}</a></div>
+                                    <div><a href="/blog/{{$item->link_slug}}-{{$item->id}}/{{$item->danh_muc_id}}">{{$item->thanhVien->ho_ten}}</a></div>
+                                    <div><a href="/blog/{{$item->link_slug}}-{{$item->id}}/{{$item->danh_muc_id}}" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
                                 </div>
-                                <h3 class="heading"><a href="#">Những trái hoa quả tốt cho sức khỏe</a></h3>
-                                <p>Đằng sau những ngọn núi, nơi chứa những sản phẩm tốt</p>
-                                <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Xem thêm</a></p>
+                                <h3 class="heading"><a href="/blog/{{$item->link_slug}}-{{$item->id}}/{{$item->danh_muc_id}}">{{$item->mo_ta}}</p>
+                                <p><a href="/blog/{{$item->link_slug}}-{{$item->id}}/{{$item->danh_muc_id}}" class="btn btn-primary py-2 px-3">Xem thêm</a></p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 d-flex ftco-animate">
-                        <div class="blog-entry align-self-stretch d-md-flex">
-                            <a href="blog-single.html" class="block-20"
-                                style="background-image: url('images/image_2.jpg');">
-                            </a>
-                            <div class="text d-block pl-md-4">
-                                <div class="meta mb-3">
-                                    <div><a href="#">July 20, 2019</a></div>
-                                    <div><a href="#">Admin</a></div>
-                                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                                </div>
-                                <h3 class="heading"><a href="#">Sự thật bất ngờ về đậu lành</a></h3>
-                                <p>Đằng sau những ngọn núi, nơi chứa những sản phẩm tốt</p>
-                                <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Xem thêm</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 d-flex ftco-animate">
-                        <div class="blog-entry align-self-stretch d-md-flex">
-                            <a href="blog-single.html" class="block-20"
-                                style="background-image: url('images/image_3.jpg');">
-                            </a>
-                            <div class="text d-block pl-md-4">
-                                <div class="meta mb-3">
-                                    <div><a href="#">July 20, 2019</a></div>
-                                    <div><a href="#">Admin</a></div>
-                                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                                </div>
-                                <h3 class="heading"><a href="#">Cách mà chế biến những sản phẩm tươi sống</a></h3>
-                                <p>Đằng sau những ngọn núi, nơi chứa những sản phẩm tốt</p>
-                                <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Xem thêm</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 d-flex ftco-animate">
-                        <div class="blog-entry align-self-stretch d-md-flex">
-                            <a href="blog-single.html" class="block-20"
-                                style="background-image: url('images/image_4.jpg');">
-                            </a>
-                            <div class="text d-block pl-md-4">
-                                <div class="meta mb-3">
-                                    <div><a href="#">July 20, 2019</a></div>
-                                    <div><a href="#">Admin</a></div>
-                                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                                </div>
-                                <h3 class="heading"><a href="#">Gọi hoa quả đẹp nhất mà bạn từng biết</a></h3>
-                                <p>Đằng sau những ngọn núi, nơi chứa những sản phẩm tốt</p>
-                                <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Xem thêm</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 d-flex ftco-animate">
-                        <div class="blog-entry align-self-stretch d-md-flex">
-                            <a href="blog-single.html" class="block-20"
-                                style="background-image: url('images/image_5.jpg');">
-                            </a>
-                            <div class="text d-block pl-md-4">
-                                <div class="meta mb-3">
-                                    <div><a href="#">July 20, 2019</a></div>
-                                    <div><a href="#">Admin</a></div>
-                                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                                </div>
-                                <h3 class="heading"><a href="#">Các dưỡng chất trong các sản phẩm tươi sống</a></h3>
-                                <p>Đằng sau những ngọn núi, nơi chứa những sản phẩm tốt</p>
-                                <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Xem thêm</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 d-flex ftco-animate">
-                        <div class="blog-entry align-self-stretch d-md-flex">
-                            <a href="blog-single.html" class="block-20"
-                                style="background-image: url('images/image_6.jpg');">
-                            </a>
-                            <div class="text d-block pl-md-4">
-                                <div class="meta mb-3">
-                                    <div><a href="#">July 20, 2019</a></div>
-                                    <div><a href="#">Admin</a></div>
-                                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                                </div>
-                                <h3 class="heading"><a href="#">Bầy hoa quả lên đĩa đẹp cho người vụng về</a></h3>
-                                <p>Đằng sau những ngọn núi, nơi chứa những sản phẩm tốt</p>
-                                <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Xem thêm</a></p>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+
+
                 </div>
             </div> <!-- .col-md-8 -->
             <div class="col-lg-4 sidebar ftco-animate">
                 <div class="sidebar-box">
-                    <form action="#" class="search-form">
+                    <form method="GET" class="search-form" id="tim-kiem">
                         <div class="form-group">
                             <span class="icon ion-ios-search"></span>
-                            <input type="text" class="form-control" placeholder="Tìm kiếm...">
+                            <input onchange="return search()" type="text" class="form-control" name="tuKhoa" placeholder="Tìm kiếm..." value="">
                         </div>
                     </form>
                 </div>
                 <div class="sidebar-box ftco-animate">
                     <h3 class="heading">Danh mục</h3>
                     <ul class="categories">
-                        <li><a href="#">Rau <span>(12)</span></a></li>
-                        <li><a href="#">Trái cây <span>(22)</span></a></li>
-                        <li><a href="#">Nước ép <span>(37)</span></a></li>
-                        <li><a href="#">Đồ khô <span>(42)</span></a></li>
+                        @foreach ($danhMuc as $item)
+                            <li><a href="/blog/{{$item->link_slug}}-{{$item->id}}">{{$item->ten}} <span>({{$item->tinTuc->count()}})</span></a></li>
+                        @endforeach
+
+
                     </ul>
                 </div>
 
                 <div class="sidebar-box ftco-animate">
                     <h3 class="heading">Bài viết gần đây</h3>
+                    @foreach ($ttMoi as $item)
                     <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+                        <a class="blog-img mr-4" style="background-image: url(/backend/{{$item->link_anh}});"></a>
                         <div class="text">
-                            <h3 class="heading-1"><a href="#">Những trái hoa quả tốt cho sức khỏe</a></h3>
+                            <h3 class="heading-1"><a href="/blog/{{$item->link_slug}}-{{$item->id}}/{{$item->danh_muc_id}}">{{$item->tieu_de}}</a></h3>
                             <div class="meta">
-                                <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
-                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                <div><a href="/blog/{{$item->link_slug}}-{{$item->id}}/{{$item->danh_muc_id}}"><span class="icon-calendar"></span> {{$item->created_at->format('M-d-Y')}}</a></div>
+                                <div><a href="/blog/{{$item->link_slug}}-{{$item->id}}/{{$item->danh_muc_id}}"><span class="icon-person"></span> {{$item->thanhVien->ho_ten}}</a></div>
+                                <div><a href="/blog/{{$item->link_slug}}-{{$item->id}}/{{$item->danh_muc_id}}"><span class="icon-chat"></span> 19</a></div>
                             </div>
                         </div>
                     </div>
-                    <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-                        <div class="text">
-                            <h3 class="heading-1"><a href="#">Những trái hoa quả tốt cho sức khỏe</a></h3>
-                            <div class="meta">
-                                <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
-                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
-                        <div class="text">
-                            <h3 class="heading-1"><a href="#">Những trái hoa quả tốt cho sức khỏe</a></h3>
-                            <div class="meta">
-                                <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
-                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+
+
                 </div>
 
                 <div class="sidebar-box ftco-animate">
@@ -207,4 +108,9 @@
 @endsection
 @section('script')
     @parent
+    <script>
+        function search() {
+            return document.getElementById("tim-kiem").submit();
+        }
+    </script>
 @endsection

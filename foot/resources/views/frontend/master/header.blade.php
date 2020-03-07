@@ -38,7 +38,7 @@
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
                         <a class="dropdown-item" href="/shop">Sản phẩm</a>
                         <a class="dropdown-item" href="/shop/wishlist">Sản phẩm bạn yêu thích</a>
-                        <a class="dropdown-item" href="/shop/product-single">Chi tiết sản phẩm</a>
+                        <a class="dropdown-item" href="/shop">Chi tiết sản phẩm</a>
                         <a class="dropdown-item" href="/cart">Giỏ hàng</a>
                         <a class="dropdown-item" href="/cart/checkout">Thanh toán</a>
                     </div>

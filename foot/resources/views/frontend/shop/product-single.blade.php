@@ -5,8 +5,8 @@
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
-                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Trang chủ</a></span> <span
-                        class="mr-2"><a href="index.html">Sản phẩm</a></span> <span>Chi tiết sản phẩm</span></p>
+                <p class="breadcrumbs"><span class="mr-2"><a href="/">Trang chủ</a></span> <span
+                        class="mr-2"><a href="/shop">Sản phẩm</a></span> <span>Chi tiết sản phẩm</span></p>
                 <h1 class="mb-0 bread">Chi tiết sản phẩm</h1>
             </div>
         </div>
@@ -17,11 +17,11 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 mb-5 ftco-animate">
-                <a href="images/product-1.jpg" class="image-popup"><img src="images/product-1.jpg" class="img-fluid"
-                        alt="Colorlib Template"></a>
+            <a href="images/product-1.jpg" class="image-popup"><img src="/backend/{{$sanPham->link_anh}}" class="img-fluid"
+                        alt="Colorlib Template">
             </div>
             <div class="col-lg-6 product-details pl-md-5 ftco-animate">
-                <h3>Ớt chuông</h3>
+                <h3>{{$sanPham->ten}}</h3>
                 <div class="rating d-flex">
                     <p class="text-left mr-4">
                         <a href="#" class="mr-2">5.0</a>
@@ -39,13 +39,11 @@
                         <a href="#" class="mr-2" style="color: #000;">500 <span style="color: #bbb;">Sold</span></a>
                     </p>
                 </div>
-                <p class="price"><span>$120.00</span></p>
-                <p>Bằng bí quyết chọn lọc những hạt đậu xanh chất lượng cao, những trái sầu riêng thơm ngon chín tự
-                    nhiên, kết hợp với kinh nghiệm quản lý chất lượng, công ty Phúc An Phát đã cho ra đời những sản
-                    phẩm bánh pía giữ lại trọn vẹn hương vị tự nhiên vốn có.
 
-                    Bánh Phúc An cam kết không dùng đường hóa học, không dùng hương liệu sầu riêng, không dùng bột
-                    pha chế, đây là những tiêu chí mà sản phẩm khác không có được.
+                <p class="price"><span>{{number_format($sanPham->gia-($sanPham->gia*$sanPham->giam_gia/100),0,'','.')}} VND</span>
+
+                <p>{{$sanPham->mieu_ta}}
+
                 </p>
                 <div class="row mt-4">
                     <div class="col-md-6">
@@ -99,24 +97,31 @@
     </div>
     <div class="container">
         <div class="row">
+            @foreach ($spLq as $item)
             <div class="col-md-6 col-lg-3 ftco-animate">
                 <div class="product">
-                    <a href="#" class="img-prod"><img class="img-fluid" src="images/product-1.jpg"
+                    <a href="/{{$item->link_slug}}-{{$item->id}}.html" class="img-prod"><img class="img-fluid" src="/backend/{{$item->link_anh}}"
                             alt="Colorlib Template">
-                        <span class="status">30%</span>
+                            @if ($item->giam_gia!='')
+                            <span class="status">{{$item->giam_gia}}%</span>
+                            @endif
+
                         <div class="overlay"></div>
                     </a>
                     <div class="text py-3 pb-4 px-3 text-center">
-                        <h3><a href="#">Ớt chuông</a></h3>
+                        <h3><a href="/{{$item->link_slug}}-{{$item->id}}.html">{{$item->ten}}</a></h3>
                         <div class="d-flex">
                             <div class="pricing">
-                                <p class="price"><span class="mr-2 price-dc">$120.00</span><span
-                                        class="price-sale">$80.00</span></p>
+                                <p class="price"><span @if ($item->giam_gia!='') class="mr-2 price-dc" @endif>{{number_format($item->gia,0,'','.')}} VND</span>
+                                    @if ($item->giam_gia!='')
+                                    <span class="price-sale">{{number_format($item->gia-($item->gia*$item->giam_gia/100),0,'','.')}} VND</span></p>
+                                    @endif
+
                             </div>
                         </div>
                         <div class="bottom-area d-flex px-3">
                             <div class="m-auto d-flex">
-                                <a href="#"
+                                <a href="/{{$item->link_slug}}-{{$item->id}}.html"
                                     class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                     <span><i class="ion-ios-menu"></i></span>
                                 </a>
@@ -131,96 +136,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3 ftco-animate">
-                <div class="product">
-                    <a href="#" class="img-prod"><img class="img-fluid" src="images/product-2.jpg"
-                            alt="Colorlib Template">
-                        <div class="overlay"></div>
-                    </a>
-                    <div class="text py-3 pb-4 px-3 text-center">
-                        <h3><a href="#">Dâu tây</a></h3>
-                        <div class="d-flex">
-                            <div class="pricing">
-                                <p class="price"><span>$120.00</span></p>
-                            </div>
-                        </div>
-                        <div class="bottom-area d-flex px-3">
-                            <div class="m-auto d-flex">
-                                <a href="#"
-                                    class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                    <span><i class="ion-ios-menu"></i></span>
-                                </a>
-                                <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                    <span><i class="ion-ios-cart"></i></span>
-                                </a>
-                                <a href="#" class="heart d-flex justify-content-center align-items-center ">
-                                    <span><i class="ion-ios-heart"></i></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 ftco-animate">
-                <div class="product">
-                    <a href="#" class="img-prod"><img class="img-fluid" src="images/product-3.jpg"
-                            alt="Colorlib Template">
-                        <div class="overlay"></div>
-                    </a>
-                    <div class="text py-3 pb-4 px-3 text-center">
-                        <h3><a href="#">Đậu xanh</a></h3>
-                        <div class="d-flex">
-                            <div class="pricing">
-                                <p class="price"><span>$120.00</span></p>
-                            </div>
-                        </div>
-                        <div class="bottom-area d-flex px-3">
-                            <div class="m-auto d-flex">
-                                <a href="#"
-                                    class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                    <span><i class="ion-ios-menu"></i></span>
-                                </a>
-                                <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                    <span><i class="ion-ios-cart"></i></span>
-                                </a>
-                                <a href="#" class="heart d-flex justify-content-center align-items-center ">
-                                    <span><i class="ion-ios-heart"></i></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 ftco-animate">
-                <div class="product">
-                    <a href="#" class="img-prod"><img class="img-fluid" src="images/product-4.jpg"
-                            alt="Colorlib Template">
-                        <div class="overlay"></div>
-                    </a>
-                    <div class="text py-3 pb-4 px-3 text-center">
-                        <h3><a href="#">Bắp cải tím</a></h3>
-                        <div class="d-flex">
-                            <div class="pricing">
-                                <p class="price"><span>$120.00</span></p>
-                            </div>
-                        </div>
-                        <div class="bottom-area d-flex px-3">
-                            <div class="m-auto d-flex">
-                                <a href="#"
-                                    class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                    <span><i class="ion-ios-menu"></i></span>
-                                </a>
-                                <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                    <span><i class="ion-ios-cart"></i></span>
-                                </a>
-                                <a href="#" class="heart d-flex justify-content-center align-items-center ">
-                                    <span><i class="ion-ios-heart"></i></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
+
+
         </div>
     </div>
 </section>

@@ -21,17 +21,19 @@ Route::get('','frontend\HomeController@trangChu');
 //Blog
 Route::group(['prefix' => 'blog'], function () {
     Route::get('','frontend\BlogController@tinTuc');
-    Route::get('blog-single', 'frontend\BlogController@ctTinTuc');
+    Route::get('{slugTt}/{idDm}', 'frontend\BlogController@ctTinTuc');
+    Route::get('{slugDm}','frontend\BlogController@tinTucDm');
 });
+
 
 
 //Shop
 Route::group(['prefix' => 'shop'], function () {
     Route::get('', 'frontend\ShopController@cuaHang');
-    Route::get('product-single', 'frontend\ShopController@ctSanPham');
     Route::get('wishlist','frontend\ShopController@spUaThich');
+    Route::get('{dmSlug}/{dmId}', 'frontend\ShopController@dmCuaHang');
 });
-
+Route::get('{slugSp}.html', 'frontend\ShopController@ctSanPham');
 
 //Cart
 Route::group(['prefix' => 'cart'], function () {
