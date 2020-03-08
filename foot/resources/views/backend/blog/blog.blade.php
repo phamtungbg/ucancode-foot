@@ -66,7 +66,7 @@
                                         </td>
                                         <td>{{$item->danhMuc->ten}}</td>
                                         <td>{{$item->thanhVien->ten}}</td>
-                                        <td>{{$item->created_at}}</td>
+                                        <td>{{$item->created_at->format('M-d-Y')}}</td>
                                         <td>
                                         <a href="/admin/blog/edit/{{$item->id}}" class="btn btn-warning"><i class="fa fa-pencil"
                                                     aria-hidden="true"></i> Sửa</a>
