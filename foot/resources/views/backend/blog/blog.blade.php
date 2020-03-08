@@ -37,24 +37,6 @@
                                         class="glyphicon glyphicon-remove"></span></a>
                             </div>
                             @endif
-                            <form method="get">
-                                <div class="row">
-                                    <div class="col-md-5">
-                                        <div class="form-group">
-                                            <label for="">Tìm theo danh mục: </label>
-                                            <select class="form-control" name="danh_muc" id="">
-                                                <option>Tin tức</option>
-                                                <option>---|Trái cây</option>
-                                                <option>---|Nước ép</option>
-                                                <option>---|Rau củ</option>
-                                                <option>---|Đồ khô</option>
-                                            </select>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
-                                    </div>
-
-                                </div>
-                            </form>
 
                             <table class="table table-bordered" style="margin-top:20px;">
 
@@ -99,11 +81,7 @@
                             </table>
                             <div align='right'>
                                 <ul class="pagination">
-                                    <li class="page-item"><a class="page-link" href="#">Trở lại</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">tiếp theo</a></li>
+                                    {{$tinTuc->links()}}
                                 </ul>
                             </div>
                         </div>

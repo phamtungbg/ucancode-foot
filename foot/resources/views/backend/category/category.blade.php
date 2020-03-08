@@ -27,15 +27,11 @@
                         <form action="" method="post" enctype="multipart/form-data">
                             @csrf
                         <div class="col-md-5">
+
                             <div class="form-group">
                                 <label for="">Danh mục cha:</label>
                                 <select class="form-control" name="danh_muc" id="">
-                                    <option>----ROOT----</option>
-                                    <option>Sản phẩm</option>
-                                    <option>---|Trái cây</option>
-                                    <option>---|Nước ép</option>
-                                    <option>---|Rau củ</option>
-                                    <option>---|Đồ khô</option>
+                                    {{dmSelectOpt($allDanhMuc,0,'',0)}}
                                 </select>
                             </div>
                             <div class="form-group">
@@ -43,15 +39,8 @@
                                 <input type="text" class="form-control" name="ten" id=""
                                     placeholder="Tên danh mục mới">
                                     {{hienLoi($errors,'ten')}}
+                            </div>
 
-                            </div>
-                            <div class="form-group">
-                                <label for="">Loại danh mục</label>
-                                <select class="form-control" name="loai_danh_muc" id="">
-                                    <option>Sản phẩm</option>
-                                    <option>Tin tức</option>
-                                </select>
-                            </div>
                             <div class="form-group">
                                 <label>Ảnh danh mục</label>
                                 <input id="img" type="file" name="anh" class="form-control hidden"
@@ -63,60 +52,19 @@
                         </div>
                     </form>
                         <div class="col-md-7">
+                            @if (session('thongBao'))
                             <div class="alert bg-success" role="alert">
                                 <svg class="glyph stroked checkmark">
                                     <use xlink:href="#stroked-checkmark"></use>
-                                </svg> Đã thêm danh mục thành công! <a href="#" class="pull-right"><span
+                                </svg> session('thongBao') <a href="#" class="pull-right"><span
                                         class="glyphicon glyphicon-remove"></span></a>
                             </div>
+                            @endif
+
                             <h3 style="margin: 0;"><strong>Phân cấp Menu</strong></h3>
                             <div class="vertical-menu">
                                 <div class="item-menu active">Danh mục </div>
-                                <div class="item-menu"><span>Sản phẩm</span>
-                                    <div class="category-fix">
-                                        <a class="btn-category btn-primary" href="editcategory.html"><i
-                                                class="fa fa-edit"></i></a>
-                                        <a class="btn-category btn-danger" href="#"><i
-                                                class="fas fa-times"></i></i></a>
-
-                                    </div>
-                                </div>
-                                <div class="item-menu"><span>---|Trái cây</span>
-                                    <div class="category-fix">
-                                        <a class="btn-category btn-primary" href="editcategory.html"><i
-                                                class="fa fa-edit"></i></a>
-                                        <a class="btn-category btn-danger" href="#"><i
-                                                class="fas fa-times"></i></i></a>
-
-                                    </div>
-                                </div>
-                                <div class="item-menu"><span>---|---|Trái cây (Dành cho việc mở rộng)</span>
-                                    <div class="category-fix">
-                                        <a class="btn-category btn-primary" href="editcategory.html"><i
-                                                class="fa fa-edit"></i></a>
-                                        <a class="btn-category btn-danger" href="#"><i
-                                                class="fas fa-times"></i></i></a>
-
-                                    </div>
-                                </div>
-                                <div class="item-menu"><span>Tin tức</span>
-                                    <div class="category-fix">
-                                        <a class="btn-category btn-primary" href="editcategory.html"><i
-                                                class="fa fa-edit"></i></a>
-                                        <a class="btn-category btn-danger" href="#"><i
-                                                class="fas fa-times"></i></i></a>
-
-                                    </div>
-                                </div>
-                                <div class="item-menu"><span>---|Trái cây</span>
-                                    <div class="category-fix">
-                                        <a class="btn-category btn-primary" href="editcategory.html"><i
-                                                class="fa fa-edit"></i></a>
-                                        <a class="btn-category btn-danger" href="#"><i
-                                                class="fas fa-times"></i></i></a>
-
-                                    </div>
-                                </div>
+                                {{dmMenu($allDanhMuc,0,'')}}
 
                             </div>
                         </div>
@@ -151,5 +99,10 @@
                 $('#img').click();
             });
         });
+    </script>
+     <script>
+        function xoaDm(ten) {
+            return confirm('Bạn muốn xóa danh mục '+ ten + 'này ?');
+        }
     </script>
 @endsection

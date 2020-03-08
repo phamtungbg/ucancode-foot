@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddProductRequest;
 use App\Http\Requests\EditProductRequest;
+use App\models\danh_muc;
 use App\models\san_pham;
 use Illuminate\Support\Str;
 use DB;
@@ -14,12 +15,13 @@ class ProductController extends Controller
 {
     //list sp
     function sanPham() {
-        $data['sanPham']= san_pham::paginate(4);
+        $data['sanPham']= san_pham::paginate(8);
         return view('backend.product.listproduct',$data);
     }
     //them sp
     function themSanPham() {
-        return view('backend.product.addproduct');
+        $data['allDanhMuc'] = danh_muc::where('loai_danh_muc',0)->get();
+        return view('backend.product.addproduct',$data);
     }
     function postThemSanPham(AddProductRequest $r) {
         // dd($r->all());
@@ -39,7 +41,7 @@ class ProductController extends Controller
             $sanPham->link_anh = 'upload/'.$tenFile;
             $file->move('backend/upload',$tenFile);
         } else {
-            $sanPham->link_anh='no-img.jpg';
+            $sanPham->link_anh='upload/no-img.jpg';
 
         }
         $sanPham->save();
@@ -48,6 +50,7 @@ class ProductController extends Controller
 
     //sua sp
     function suaSanPham($idSp) {
+        $data['allDanhMuc'] = danh_muc::where('loai_danh_muc',0)->get();
         $data['sanPham'] = san_pham::find($idSp);
         return view('backend.product.editproduct',$data);
     }
@@ -64,7 +67,7 @@ class ProductController extends Controller
         $sanPham->danh_muc_id=$r->danh_muc;
 
         if ($r->hasFile('anh')) {
-            if ($sanPham->link_anh!='no-img.jpg') {
+            if ($sanPham->link_anh!='upload/no-img.jpg') {
                 unlink('backend/'.$sanPham->link_anh);
             }
             $file = $r->anh;
@@ -89,7 +92,7 @@ class ProductController extends Controller
     //xoa sp
     function xoaSanPham($idSp){
         $sanPham = san_pham::find($idSp);
-        if ($sanPham->link_anh!='no-img.jpg') {
+        if ($sanPham->link_anh!='upload/no-img.jpg') {
             unlink('backend/'.$sanPham->link_anh);
         }
         $sanPham->delete();

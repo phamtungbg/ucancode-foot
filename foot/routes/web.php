@@ -56,8 +56,9 @@ Route::group(['prefix' => 'admin','middleware'=>'CheckLogin'], function () {
     Route::group(['prefix' => 'category'], function () {
         Route::get('', 'backend\CategoryController@danhMuc');
         Route::post('', 'backend\CategoryController@postThemDanhMuc');
-        Route::get('edit', 'backend\CategoryController@suaDanhMuc');
-        Route::post('edit', 'backend\CategoryController@postSuaDanhMuc');
+        Route::get('edit/{dmId}', 'backend\CategoryController@suaDanhMuc');
+        Route::post('edit/{dmId}', 'backend\CategoryController@postSuaDanhMuc');
+        Route::get('del/{dmId}', 'backend\CategoryController@xoaDanhMuc');
     });
 
     //product

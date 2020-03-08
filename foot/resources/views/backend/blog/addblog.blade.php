@@ -22,10 +22,8 @@
                                 <div class="form-group">
                                     <label>Danh mục</label>
                                     <select name="danh_muc" class="form-control">
-                                        <option value='1' selected>Tin tức</option>
-                                        <option value='2'>---|Trái cây</option>
-                                        <option value='3'>---|Nước ép</option>
-                                        <option value='4'>---|Rau quả</option>
+                                            {{dmSelectOpt($allDanhmuc,0,'',0)}}
+
                                     </select>
                                 </div>
                                 <div class="form-group">

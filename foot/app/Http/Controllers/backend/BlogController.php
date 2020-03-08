@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddBlogRequest;
 use App\Http\Requests\EditBlogRequest;
+use App\models\danh_muc;
 use App\models\tin_tuc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -14,12 +15,13 @@ class BlogController extends Controller
 {
     function tinTuc(Request $r) {
         // dd($r->all());
-        $data['tinTuc'] = tin_tuc::all();
+        $data['tinTuc'] = tin_tuc::paginate(10);
         return view('backend.blog.blog',$data);
     }
 
     function themTinTuc() {
-        return view('backend.blog.addblog');
+        $data['allDanhmuc'] = danh_muc::where('loai_danh_muc',1)->get();
+        return view('backend.blog.addblog',$data);
     }
     function postThemTinTuc(AddBlogRequest $r){
         // dd($r->all());
@@ -38,7 +40,7 @@ class BlogController extends Controller
             $tinTuc->link_anh = 'upload/'.$tenFile;
             $file->move('backend/upload',$tenFile);
         }else {
-            $tinTuc->link_anh='no-img.jpg';
+            $tinTuc->link_anh='upload/no-img.jpg';
         }
         $tinTuc->save();
         return redirect('/admin/blog')->with('thongBao','Đã thêm thành công');
@@ -46,7 +48,7 @@ class BlogController extends Controller
 
     function suaTinTuc($idTin) {
         $data['tinTuc'] = tin_tuc::find($idTin);
-
+        $data['allDanhmuc'] = danh_muc::where('loai_danh_muc',1)->get();
         return view('backend.blog.editblog',$data);
     }
     function postSuaTinTuc(EditBlogRequest $r,$idTin){
@@ -60,7 +62,7 @@ class BlogController extends Controller
         $tinTuc->danh_muc_id=$r->danh_muc;
         $tinTuc->thanh_vien_id=Auth::user()->id;
         if ($r->hasFile('anh')) {
-            if ($tinTuc->link_anh!='no-img.jpg') {
+            if ($tinTuc->link_anh!='upload/no-img.jpg') {
                 unlink('backend/'.$tinTuc->link_anh);
             }
             $file = $r->anh;
@@ -75,7 +77,7 @@ class BlogController extends Controller
 
     function xoaTinTuc($idTin){
         $tinTuc = tin_tuc::find($idTin);
-        if ($tinTuc->link_anh!='no-img.jpg') {
+        if ($tinTuc->link_anh!='upload/no-img.jpg') {
             unlink('backend/'.$tinTuc->link_anh);
         }
         $tinTuc->delete();
