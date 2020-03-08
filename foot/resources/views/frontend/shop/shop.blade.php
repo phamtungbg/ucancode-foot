@@ -44,7 +44,7 @@
                             <div class="pricing">
                                 <p class="price"><span @if ($item->giam_gia!='') class="mr-2 price-dc" @endif>{{number_format($item->gia,0,'','.')}} VND</span>
                                     @if ($item->giam_gia!='')
-                                    <span class="price-sale">{{number_format($item->gia-($item->gia*$item->giam_gia/100),0,'','.')}} VND</span></p>
+                                    <span class="price-sale">{{number_format($item->gia*(100-$item->giam_gia)/100,0,'','.')}} VND</span></p>
                                     @else
                                         </p>
                                     @endif
@@ -57,10 +57,10 @@
                                     class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                     <span><i class="ion-ios-menu"></i></span>
                                 </a>
-                                <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                <a href="/cart/add?id={{$item->id}}" class="buy-now d-flex justify-content-center align-items-center mx-1">
                                     <span><i class="ion-ios-cart"></i></span>
                                 </a>
-                                <a href="#" class="heart d-flex justify-content-center align-items-center ">
+                                <a onclick="return wishlist('{{$item->ten}}','{{$item->id}}')" href="/" class="heart d-flex justify-content-center align-items-center ">
                                     <span><i class="ion-ios-heart"></i></span>
                                 </a>
                             </div>
@@ -112,4 +112,13 @@
 @endsection
 @section('script')
     @parent
+
+    <script>
+        function wishlist(ten,id) {
+            localStorage.setItem(ten, id);
+            alert('Đã thêm vào wishlist');
+            return false;
+        }
+    </script>
+    
 @endsection

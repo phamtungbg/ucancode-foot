@@ -1,7 +1,6 @@
 @extends('frontend.master.master')
 @section('title','Sản phẩm yêu thích')
 @section('content')
-
 <div class="hero-wrap hero-bread" style="background-image: url('images/bg_1.jpg');">
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -31,17 +30,17 @@
                             </tr>
                         </thead>
                         <tbody>
+
                             <tr class="text-center">
                                 <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
 
                                 <td class="image-prod">
-                                    <div class="img" style="background-image:url(images/product-1.jpg);"></div>
+                                    <div class="img" style="background-image:url(/backend/);"></div>
                                 </td>
 
                                 <td class="product-name">
                                     <h3>Ớt chuông</h3>
-                                    <p>100% Thực phẩm sạch, tập trung chủ yếu với dòng hữu cơ,,thuận tự nhiên được
-                                        chọn lọc từ nguồn cung cấp uy tín</p>
+                                <p>{{print_r($sanPham)}}</p>
                                 </td>
 
                                 <td class="price">$4.90</td>
@@ -56,132 +55,12 @@
                                 <td class="total">$4.90</td>
                             </tr><!-- END TR-->
 
-                            <tr class="text-center">
-                                <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
 
-                                <td class="image-prod">
-                                    <div class="img" style="background-image:url(images/product-2.jpg);"></div>
-                                </td>
 
-                                <td class="product-name">
-                                    <h3>Ớt chuông</h3>
-                                    <p>100% Thực phẩm sạch, tập trung chủ yếu với dòng hữu cơ,,thuận tự nhiên được
-                                        chọn lọc từ nguồn cung cấp uy tín</p>
-                                </td>
 
-                                <td class="price">$15.70</td>
-
-                                <td class="quantity">
-                                    <div class="input-group mb-3">
-                                        <input type="text" name="quantity"
-                                            class="quantity form-control input-number" value="1" min="1" max="100">
-                                    </div>
-                                </td>
-
-                                <td class="total">$15.70</td>
-                            </tr><!-- END TR-->
-
-                            <tr class="text-center">
-                                <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-
-                                <td class="image-prod">
-                                    <div class="img" style="background-image:url(images/product-3.jpg);"></div>
-                                </td>
-
-                                <td class="product-name">
-                                    <h3>Ớt chuông</h3>
-                                    <p>100% Thực phẩm sạch, tập trung chủ yếu với dòng hữu cơ,,thuận tự nhiên được
-                                        chọn lọc từ nguồn cung cấp uy tín</p>
-                                </td>
-
-                                <td class="price">$15.70</td>
-
-                                <td class="quantity">
-                                    <div class="input-group mb-3">
-                                        <input type="text" name="quantity"
-                                            class="quantity form-control input-number" value="1" min="1" max="100">
-                                    </div>
-                                </td>
-
-                                <td class="total">$15.70</td>
-                            </tr><!-- END TR-->
-
-                            <tr class="text-center">
-                                <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-
-                                <td class="image-prod">
-                                    <div class="img" style="background-image:url(images/product-4.jpg);"></div>
-                                </td>
-
-                                <td class="product-name">
-                                    <h3>Ớt chuông</h3>
-                                    <p>100% Thực phẩm sạch, tập trung chủ yếu với dòng hữu cơ,,thuận tự nhiên được
-                                        chọn lọc từ nguồn cung cấp uy tín</p>
-                                </td>
-
-                                <td class="price">$15.70</td>
-
-                                <td class="quantity">
-                                    <div class="input-group mb-3">
-                                        <input type="text" name="quantity"
-                                            class="quantity form-control input-number" value="1" min="1" max="100">
-                                    </div>
-                                </td>
-
-                                <td class="total">$15.70</td>
-                            </tr><!-- END TR-->
-
-                            <tr class="text-center">
-                                <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-
-                                <td class="image-prod">
-                                    <div class="img" style="background-image:url(images/product-5.jpg);"></div>
-                                </td>
-
-                                <td class="product-name">
-                                    <h3>Ớt chuông</h3>
-                                    <p>100% Thực phẩm sạch, tập trung chủ yếu với dòng hữu cơ,,thuận tự nhiên được
-                                        chọn lọc từ nguồn cung cấp uy tín</p>
-                                </td>
-
-                                <td class="price">$15.70</td>
-
-                                <td class="quantity">
-                                    <div class="input-group mb-3">
-                                        <input type="text" name="quantity"
-                                            class="quantity form-control input-number" value="1" min="1" max="100">
-                                    </div>
-                                </td>
-
-                                <td class="total">$15.70</td>
-                            </tr><!-- END TR-->
-
-                            <tr class="text-center">
-                                <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-
-                                <td class="image-prod">
-                                    <div class="img" style="background-image:url(images/product-6.jpg);"></div>
-                                </td>
-
-                                <td class="product-name">
-                                    <h3>Ớt chuông</h3>
-                                    <p>100% Thực phẩm sạch, tập trung chủ yếu với dòng hữu cơ,,thuận tự nhiên được
-                                        chọn lọc từ nguồn cung cấp uy tín</p>
-                                </td>
-
-                                <td class="price">$15.70</td>
-
-                                <td class="quantity">
-                                    <div class="input-group mb-3">
-                                        <input type="text" name="quantity"
-                                            class="quantity form-control input-number" value="1" min="1" max="100">
-                                    </div>
-                                </td>
-
-                                <td class="total">$15.70</td>
-                            </tr><!-- END TR-->
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>
@@ -206,7 +85,18 @@
         </div>
     </div>
 </section>
+
 @endsection
 @section('script')
     @parent
+    <script>
+        $(document).ready(function(){
+            var id = [];
+            for ( var i = 0, len = localStorage.length; i < len; ++i ) {
+                id.push(localStorage.getItem(localStorage.key(i))) ;
+                }
+            console.log(id);
+
+        })
+    </script>
 @endsection

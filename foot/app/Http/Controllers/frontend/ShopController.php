@@ -15,6 +15,7 @@ class ShopController extends Controller
         $data['activeDm'] = 0;
         return view('frontend.shop.shop',$data);
     }
+
     function dmCuahang($dmSlug,$dmId){
         $data['sanPham'] = san_pham::where('link_anh','<>','no-img.jpg')->where('danh_muc_id',$dmId)->paginate(8);
         $data['danhMuc'] = danh_muc::where('id_cha',1)->get();
@@ -32,6 +33,8 @@ class ShopController extends Controller
         return view('frontend.shop.product-single',$data);
     }
     function spUaThich() {
+
+
         return view('frontend.shop.wishlist');
     }
 }

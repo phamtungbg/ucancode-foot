@@ -16,12 +16,15 @@
 <section class="ftco-section">
     <div class="container">
         <div class="row">
+
             <div class="col-lg-6 mb-5 ftco-animate">
             <a href="images/product-1.jpg" class="image-popup"><img src="/backend/{{$sanPham->link_anh}}" class="img-fluid"
                         alt="Colorlib Template">
             </div>
+
             <div class="col-lg-6 product-details pl-md-5 ftco-animate">
                 <h3>{{$sanPham->ten}}</h3>
+
                 <div class="rating d-flex">
                     <p class="text-left mr-4">
                         <a href="#" class="mr-2">5.0</a>
@@ -45,6 +48,8 @@
                 <p>{{$sanPham->mieu_ta}}
 
                 </p>
+                <form action="/cart/add" method="get" id="them-gio">
+
                 <div class="row mt-4">
                     <div class="col-md-6">
                         <div class="form-group d-flex">
@@ -67,7 +72,7 @@
                             </button>
                         </span>
                         <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1"
-                            min="1" max="100">
+                        min="1" max="{{$sanPham->so_luong}}">
                         <span class="input-group-btn ml-2">
                             <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
                                 <i class="ion-ios-add"></i>
@@ -76,12 +81,20 @@
                     </div>
                     <div class="w-100"></div>
                     <div class="col-md-12">
-                        <p style="color: #000;">600 kg trong kho</p>
+                        @if ($sanPham->so_luong==0)
+                        <p style="color: red;">Sản phẩm đã hết hàng</p>
+                        @else
+                        <p style="color: #000;">{{$sanPham->so_luong}} kg trong kho</p>
+                        @endif
                     </div>
+                    <input type="hidden" name="id" value="{{$sanPham->id}}">
                 </div>
-                <p><a href="cart.html" class="btn btn-black py-3 px-5">Thêm vào giỏ</a></p>
+                <p><a onclick="return themGio()" class="btn btn-black py-3 px-5">Thêm vào giỏ</a></p>
+            </form>
             </div>
+
         </div>
+
     </div>
 </section>
 
@@ -114,7 +127,7 @@
                             <div class="pricing">
                                 <p class="price"><span @if ($item->giam_gia!='') class="mr-2 price-dc" @endif>{{number_format($item->gia,0,'','.')}} VND</span>
                                     @if ($item->giam_gia!='')
-                                    <span class="price-sale">{{number_format($item->gia-($item->gia*$item->giam_gia/100),0,'','.')}} VND</span></p>
+                                    <span class="price-sale">{{number_format($item->gia*(100-$item->giam_gia)/100,0,'','.')}} VND</span></p>
                                     @endif
 
                             </div>
@@ -125,10 +138,10 @@
                                     class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                     <span><i class="ion-ios-menu"></i></span>
                                 </a>
-                                <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                <a href="/cart/add?id={{$item->id}}" class="buy-now d-flex justify-content-center align-items-center mx-1">
                                     <span><i class="ion-ios-cart"></i></span>
                                 </a>
-                                <a href="#" class="heart d-flex justify-content-center align-items-center ">
+                                <a onclick="return wishlist('{{$item->ten}}','{{$item->id}}')" href="/" class="heart d-flex justify-content-center align-items-center ">
                                     <span><i class="ion-ios-heart"></i></span>
                                 </a>
                             </div>
@@ -164,4 +177,53 @@
 @endsection
 @section('script')
     @parent
+    <script>
+		$(document).ready(function(){
+
+		var quantitiy=0;
+		   $('.quantity-right-plus').click(function(e){
+
+		        // Stop acting like a button
+		        e.preventDefault();
+		        // Get the field name
+		        var quantity = parseInt($('#quantity').val());
+
+		        // If is not undefined
+
+		            $('#quantity').val(quantity + 1);
+
+
+		            // Increment
+
+		    });
+
+		     $('.quantity-left-minus').click(function(e){
+		        // Stop acting like a button
+		        e.preventDefault();
+		        // Get the field name
+		        var quantity = parseInt($('#quantity').val());
+
+		        // If is not undefined
+
+		            // Increment
+		            if(quantity>0){
+		            $('#quantity').val(quantity - 1);
+		            }
+		    });
+
+		});
+	</script>
+    <script>
+        function themGio() {
+            return document.getElementById("them-gio").submit();
+        }
+    </script>
+
+    <script>
+        function wishlist(ten,id) {
+            localStorage.setItem(ten, id);
+            alert('Đã thêm vào wishlist');
+            return false;
+        }
+    </script>
 @endsection

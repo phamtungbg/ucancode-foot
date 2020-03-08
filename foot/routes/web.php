@@ -38,8 +38,12 @@ Route::get('{slugSp}.html', 'frontend\ShopController@ctSanPham');
 //Cart
 Route::group(['prefix' => 'cart'], function () {
     Route::get('','frontend\CartController@gioHang');
+    Route::get('add','frontend\CartController@addGioHang');
     Route::get('checkout', 'frontend\CartController@thanhToan');
     Route::post('checkout', 'frontend\CartController@postThanhToan');
+    Route::get('giam-gia/{maGiamGia}','frontend\CartController@maGiamGia');
+    Route::get('del/{rowId}','frontend\CartController@xoaGioHang');
+    Route::get('update/{rowId}/{qty}','frontend\CartController@suaGioHang');
 });
 
 

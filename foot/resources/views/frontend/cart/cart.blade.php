@@ -30,55 +30,34 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($gioHang as $item)
                             <tr class="text-center">
-                                <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
+                            <td class="product-remove"><a href="/cart/del/{{$item->rowId}}"><span class="ion-ios-close"></span></a></td>
 
                                 <td class="image-prod">
-                                    <div class="img" style="background-image:url(images/product-3.jpg);"></div>
+                                    <div class="img" style="background-image:url(/backend/{{$item->options->link_anh}});"></div>
                                 </td>
 
                                 <td class="product-name">
-                                    <h3>Ớt chuông</h3>
-                                    <p>100% Thực phẩm sạch, tập trung chủ yếu với dòng hữu cơ,,thuận tự nhiên được
-                                        chọn lọc từ nguồn cung cấp uy tín</p>
+                                    <h3>{{$item->name}}</h3>
+                                    <p>{{$item->options->mieu_ta}}</p>
                                 </td>
 
-                                <td class="price">$4.90</td>
+                                <td class="price">{{number_format($item->price,0,'','.')}} VND</td>
 
                                 <td class="quantity">
                                     <div class="input-group mb-3">
-                                        <input type="text" name="quantity"
-                                            class="quantity form-control input-number" value="1" min="1" max="100">
+                                    <input onchange="return suaGioHang('{{$item->rowId}}',this.value)" type="text" name="quantity"
+                                            class="quantity form-control input-number" value="{{$item->qty}}" min="1" max="{{$item->options->con_hang}}">
                                     </div>
                                 </td>
 
-                                <td class="total">$4.90</td>
+                                <td class="total">{{number_format($item->price*$item->qty,0,'','.')}}</td>
                             </tr><!-- END TR-->
+                            @endforeach
 
-                            <tr class="text-center">
-                                <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
 
-                                <td class="image-prod">
-                                    <div class="img" style="background-image:url(images/product-4.jpg);"></div>
-                                </td>
 
-                                <td class="product-name">
-                                    <h3>Ớt chuông</h3>
-                                    <p>100% Thực phẩm sạch, tập trung chủ yếu với dòng hữu cơ,,thuận tự nhiên được
-                                        chọn lọc từ nguồn cung cấp uy tín</p>
-                                </td>
-
-                                <td class="price">$15.70</td>
-
-                                <td class="quantity">
-                                    <div class="input-group mb-3">
-                                        <input type="text" name="quantity"
-                                            class="quantity form-control input-number" value="1" min="1" max="100">
-                                    </div>
-                                </td>
-
-                                <td class="total">$15.70</td>
-                            </tr><!-- END TR-->
                         </tbody>
                     </table>
                 </div>
@@ -86,36 +65,38 @@
         </div>
         <div class="row justify-content-end">
             <div class="col-lg-8 mt-5 cart-wrap ftco-animate">
+                <form method="get" class="info">
                 <div class="cart-total mb-3">
                     <h3>Mã giảm giá</h3>
                     <p>Hãy điền mã giảm giá nếu có</p>
-                    <form action="#" class="info">
+
                         <div class="form-group">
                             <label for="">Mã giảm giá</label>
-                            <input type="text" class="form-control text-left px-3" placeholder="">
+                            <input type="text" name="ma_giam_gia" id="ma_giam_gia" class="form-control text-left px-3" placeholder="">
                         </div>
-                    </form>
+
                 </div>
-                <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Sử dụng mã</a></p>
+                <p><a id="dungMa" class="btn btn-primary py-3 px-4">Sử dụng mã</a></p>
+            </form>
             </div>
             <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
                 <div class="cart-total mb-3">
                     <h3>Tính tiền</h3>
                     <p class="d-flex">
                         <span>Tổng tiền</span>
-                        <span>$20.60</span>
+                        <span>{{Cart::total(0,'','.')}} VND</span>
                     </p>
                     <p class="d-flex">
                         <span>Tiền triết khấu</span>
-                        <span>$3.00</span>
+                        <span> {{number_format($giamGia,0,'','.')}} VND</span>
                     </p>
                     <hr>
                     <p class="d-flex total-price">
                         <span>Tổng tiền</span>
-                        <span>$17.60</span>
+                        <span>{{number_format($thanhToan,0,'','.')}} VND</span>
                     </p>
                 </div>
-                <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Hoàn tất thanh toán</a></p>
+                <p><a href="/cart/checkout?ma_giam_gia={{$maGiamGia}}" class="btn btn-primary py-3 px-4">Hoàn tất thanh toán</a></p>
             </div>
         </div>
     </div>
@@ -142,4 +123,80 @@
 @endsection
 @section('script')
     @parent
+    <script>
+		$(document).ready(function(){
+
+		var quantitiy=0;
+		   $('.quantity-right-plus').click(function(e){
+
+		        // Stop acting like a button
+		        e.preventDefault();
+		        // Get the field name
+		        var quantity = parseInt($('#quantity').val());
+
+		        // If is not undefined
+
+		            $('#quantity').val(quantity + 1);
+
+
+		            // Increment
+
+		    });
+
+		     $('.quantity-left-minus').click(function(e){
+		        // Stop acting like a button
+		        e.preventDefault();
+		        // Get the field name
+		        var quantity = parseInt($('#quantity').val());
+
+		        // If is not undefined
+
+		            // Increment
+		            if(quantity>0){
+		            $('#quantity').val(quantity - 1);
+		            }
+		    });
+
+		});
+	</script>
+    <script>
+        $('#dungMa').click(function(event){
+            event.preventDefault();
+            var maGiamGia = $("#ma_giam_gia").val();
+
+            if (maGiamGia=='') {
+                return alert('Hãy nhập mã giảm giá !')
+            }
+
+
+            $.get(
+                "/cart/giam-gia/"+ maGiamGia,
+                function(data) {
+                    if (data=='wrong code') {
+                        return alert('Mã giảm giá không tồn tại !');
+                    }else if(data=='code used'){
+                        return alert('Mã giảm giã đã được sử dụng !');
+                    }else if(data=='success'){
+                        alert('Áp dụng mã thành công');
+                        $(".info").submit();
+                    }
+                }
+            );
+        }
+        );
+    </script>
+    <script>
+        function suaGioHang(rowId,qty) {
+            $.get(
+                "/cart/update/"+rowId+"/"+qty,
+                function(data) {
+                    if (data=='update success') {
+                        location.reload();
+                    }else{
+                        alert('cập nhật giỏ hàng thất bại');
+                    }
+                }
+            )
+        }
+    </script>
 @endsection
