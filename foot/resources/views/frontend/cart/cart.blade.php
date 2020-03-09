@@ -96,7 +96,7 @@
                         <span>{{number_format($thanhToan,0,'','.')}} VND</span>
                     </p>
                 </div>
-                <p><a href="/cart/checkout?ma_giam_gia={{$maGiamGia}}" class="btn btn-primary py-3 px-4">Hoàn tất thanh toán</a></p>
+                <p><a href="/cart/checkout" class="btn btn-primary py-3 px-4">Hoàn tất thanh toán</a></p>
             </div>
         </div>
     </div>
@@ -168,17 +168,19 @@
                 return alert('Hãy nhập mã giảm giá !')
             }
 
-
-            $.get(
-                "/cart/giam-gia/"+ maGiamGia,
+            $.post(
+                "/cart/giam-gia",
+                {maGiamGia:maGiamGia,"_token": "{{ csrf_token() }}"},
                 function(data) {
                     if (data=='wrong code') {
                         return alert('Mã giảm giá không tồn tại !');
                     }else if(data=='code used'){
                         return alert('Mã giảm giã đã được sử dụng !');
+                    }else if(data == 'already use code'){
+                        return alert('Mỗi đơn hàng chỉ áp dụng 1 mã giảm giá');
                     }else if(data=='success'){
                         alert('Áp dụng mã thành công');
-                        $(".info").submit();
+                        window.location.reload();
                     }
                 }
             );

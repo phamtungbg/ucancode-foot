@@ -12,18 +12,20 @@ use Illuminate\Http\Request;
 use Cart;
 class CartController extends Controller
 {
-    function gioHang(request $r) {
-        if ($r->ma_giam_gia!='') {
-            $data['maGiamGia'] = $r->ma_giam_gia;
+    function gioHang() {
+        if (session()->has('maGiamGia')) {
+            $data['maGiamGia'] = session('maGiamGia')[0];
             $data['gioHang'] =Cart::content();
             $data['giamGia'] = Cart::total(0,'','')*10/100;
             $data['thanhToan']=Cart::total(0,'','')-(Cart::total(0,'','')*10/100);
-            return view('frontend.cart.cart',$data);
+
+        }else{
+            $data['maGiamGia'] = '';
+            $data['gioHang'] =Cart::content();
+            $data['giamGia'] = 0;
+            $data['thanhToan']=Cart::total(0,'','');
         }
-        $data['maGiamGia'] = '';
-        $data['gioHang'] =Cart::content();
-        $data['giamGia'] = 0;
-        $data['thanhToan']=Cart::total(0,'','');
+
         // dd(Cart::content()->toarray());
         return view('frontend.cart.cart',$data);
     }
@@ -44,23 +46,29 @@ class CartController extends Controller
         return redirect('/cart');
     }
 
-    function maGiamGia($maGiamGia){
-        $maGg = ma_giam_gia::where('ma',$maGiamGia)->first();
-        if ($maGg!='') {
-            if ($maGg->trang_thai==1) {
-                return 'code used';
-            } else {
-
-               return 'success';
-            }
+    function maGiamGia(request $r){
+        if (session()->has('maGiamGia')) {
+            return 'already use code';
         }else{
-           return 'wrong code';
+            $maGg = ma_giam_gia::where('ma',$r->maGiamGia)->first();
+            if ($maGg!='') {
+                if ($maGg->trang_thai==1) {
+                    return 'code used';
+                } else {
+                    $r->session()->push('maGiamGia',$r->maGiamGia);
+                   return 'success';
+                }
+            }else{
+               return 'wrong code';
+            }
         }
+
+
     }
 
-    function thanhToan(request $r) {
-        if ($r->ma_giam_gia!='') {
-            $data['maGiamGia'] = $r->ma_giam_gia;
+    function thanhToan() {
+        if (session()->has('maGiamGia')) {
+            $data['maGiamGia'] = session('maGiamGia')[0];
             $data['gioHang'] =Cart::content();
             $data['giamGia'] = Cart::total(0,'','')*10/100;
             $data['thanhToan']=Cart::total(0,'','')-(Cart::total(0,'','')*10/100);
@@ -75,8 +83,10 @@ class CartController extends Controller
 
     }
     function postThanhToan(CheckoutRequest $r) {
-        $maGiamGia = ma_giam_gia::where('ma',$r->ma_giam_gia)->first();
-        $maGiamGia->trang_thai =1 ;
+        if (session()->has('maGiamGia')){
+            $maGiamGia = ma_giam_gia::where('ma',session('maGiamGia')[0])->first();
+            $maGiamGia->trang_thai =1 ;
+        }
 
         $donHang = new don_hang;
         $donHang->ho_ten=$r->ho_ten;
@@ -93,12 +103,30 @@ class CartController extends Controller
             $ctDonHang->ct_so_luong_mua=$item->qty;
             $ctDonHang->don_hang_id= $donHang->id;
             $ctDonHang->san_pham_id= $item->id;
-            $ctDonHang->ma_giam_gia_id= $maGiamGia->id;
+            if (session()->has('maGiamGia')){
+                $ctDonHang->ma_giam_gia_id= $maGiamGia->id;
+            }
             $ctDonHang->save();
         }
 
         Cart::destroy();
+        $r->session()->forget('maGiamGia');
         return redirect('/');
+    }
+
+    function muaNgay(request $r){
+        $sanPham = san_pham::find($r->id);
+        Cart::add(['id' => $sanPham->id,
+        'name' => $sanPham->ten,
+        'qty' => $r->input('quantity',1),
+        'price' => $sanPham->gia*(100-$sanPham->giam_gia)/100,
+        'weight' => 0,
+        'options' => ['link_anh' => $sanPham->link_anh,
+                        'giam_gia'=>$sanPham->giam_gia,
+                        'con_hang' => $sanPham->so_luong,
+                        'mieu_ta' => $sanPham->mieu_ta
+                        ]]);
+        return 'add success';
     }
 
     function xoaGioHang($rowId){
