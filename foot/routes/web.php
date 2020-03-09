@@ -31,6 +31,7 @@ Route::group(['prefix' => 'blog'], function () {
 Route::group(['prefix' => 'shop'], function () {
     Route::get('', 'frontend\ShopController@cuaHang');
     Route::get('wishlist','frontend\ShopController@spUaThich');
+    Route::post('wishlist','frontend\ShopController@postUaThich');
     Route::get('{dmSlug}/{dmId}', 'frontend\ShopController@dmCuaHang');
 });
 Route::get('{slugSp}.html', 'frontend\ShopController@ctSanPham');

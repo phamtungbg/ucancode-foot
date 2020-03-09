@@ -363,6 +363,22 @@
         function wishlist(ten,id) {
             localStorage.setItem(ten, id);
             alert('Đã thêm vào wishlist');
+
+            $.ajaxSetup({ cache: false });
+            var id = [];
+            for ( var i = 0, len = localStorage.length; i < len; ++i ) {
+                id.push(localStorage.getItem(localStorage.key(i))) ;
+                }
+                console.log(id);
+
+            $.post(
+                "/shop/wishlist",
+                {id:id,
+                "_token": "{{ csrf_token() }}"},
+                function(data){
+                    // window.location.reload();
+                }
+            )
             return false;
         }
     </script>

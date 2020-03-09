@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
-                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Trang chủ</a></span> <span>Danh sách
+                <p class="breadcrumbs"><span class="mr-2"><a href="/">Trang chủ</a></span> <span>Danh sách
                         yêu thích</span></p>
                 <h1 class="mb-0 bread">Danh sách bạn yêu thích</h1>
             </div>
@@ -22,38 +22,39 @@
                         <thead class="thead-primary">
                             <tr class="text-center">
                                 <th>&nbsp;</th>
-                                <th>Product List</th>
+                                <th>Sản phẩm</th>
                                 <th>&nbsp;</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
+                                <th>Giá tiền</th>
+
                             </tr>
                         </thead>
                         <tbody>
+                            @if (session()->has('id'))
 
+                            @foreach ($sanPham as $item)
                             <tr class="text-center">
-                                <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
+                                <td class="product-remove"><a onclick="return delWishlist('{{$item->ten}}')" href="/shop/wishlist"><span class="ion-ios-close"></span></a></td>
 
                                 <td class="image-prod">
-                                    <div class="img" style="background-image:url(/backend/);"></div>
+                                    <div class="img" style="background-image:url(/backend/{{$item->link_anh}});"></div>
                                 </td>
 
                                 <td class="product-name">
-                                    <h3>Ớt chuông</h3>
-                                <p>{{print_r($sanPham)}}</p>
+                                    <h3>{{$item->ten}}</h3>
+                                <p>{{$item->mieu_ta}}</p>
                                 </td>
-
-                                <td class="price">$4.90</td>
-
-                                <td class="quantity">
-                                    <div class="input-group mb-3">
-                                        <input type="text" name="quantity"
-                                            class="quantity form-control input-number" value="1" min="1" max="100">
-                                    </div>
-                                </td>
-
-                                <td class="total">$4.90</td>
+                                @if ($item->giam_gia!='')
+                                <td class="price">{{number_format($item->gia*(100-$item->giam_gia)/100,0,'','.')}} VND</td>
+                                @else
+                                <td class="price">{{number_format($item->gia,0,'','.')}} VND</td>
+                                @endif
                             </tr><!-- END TR-->
+                            @endforeach
+                            @else
+                                <tr class="text-center">
+                                    <td><h3>Không có sản phẩm nào trong wishlist</h3></td>
+                                </tr>
+                            @endif
 
 
 
@@ -89,14 +90,30 @@
 @endsection
 @section('script')
     @parent
+
     <script>
-        $(document).ready(function(){
+        function delWishlist(ten) {
+            localStorage.removeItem(ten);
+            alert('Đã xóa khỏi wishlist');
+
+
+            $.ajaxSetup({ cache: false });
             var id = [];
             for ( var i = 0, len = localStorage.length; i < len; ++i ) {
                 id.push(localStorage.getItem(localStorage.key(i))) ;
                 }
-            console.log(id);
+                console.log(id);
 
-        })
+            $.post(
+                "/shop/wishlist",
+                {id:id,
+                "_token": "{{ csrf_token() }}"},
+                function(data){
+                    window.location.reload();
+                }
+            )
+            return false;
+
+        }
     </script>
 @endsection

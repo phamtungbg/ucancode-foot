@@ -33,8 +33,19 @@ class ShopController extends Controller
         return view('frontend.shop.product-single',$data);
     }
     function spUaThich() {
+        $data=[];
+        if (session()->has('id')) {
 
+            $data['sanPham'] = san_pham::whereIn('id',session('id')[0])->get();
+        }
 
-        return view('frontend.shop.wishlist');
+        return view('frontend.shop.wishlist',$data);
+    }
+    function postUaThich(request $r) {
+        $r->session()->forget('id');
+        if (isset($r->id)) {
+            $r->session()->push('id',$r->id);
+        }
+        return 'success';
     }
 }
