@@ -37,9 +37,11 @@ class ProductController extends Controller
         $sanPham->save();
         if ($r->hasFile('anh')) {
             $file = $r->anh;
-            $tenFile = Str::slug($r->ten, '-').'-'.$sanPham->id.'.'.$file->getClientOriginalExtension();
+            $tenFile = Str::slug($r->ten, '-').'-'.$sanPham->id.'.'.$file->getClientOriginalExtension(); //extentsion()
             $sanPham->link_anh = 'upload/'.$tenFile;
+
             $file->move('backend/upload',$tenFile);
+            // $file->storeAs('upload',$tenFile,'upload')
         } else {
             $sanPham->link_anh='upload/no-img.jpg';
 

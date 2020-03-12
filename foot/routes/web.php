@@ -12,8 +12,6 @@
 */
 //FRONTEND
 
-use Illuminate\Routing\RouteGroup;
-
 Route::get('','frontend\HomeController@trangChu');
     Route::get('about', 'frontend\HomeController@thongTin');
     Route::get('contact', 'frontend\HomeController@lienHe');
@@ -54,6 +52,10 @@ Route::group(['prefix' => 'cart'], function () {
 Route::get('login','backend\LoginController@dangNhap')->middleware('CheckLogout');
 Route::post('login','backend\LoginController@postDangNhap');
 Route::get('logout','backend\LoginController@dangXuat');
+Route::get('register', 'backend\LoginController@dangKy');
+Route::post('register', 'backend\LoginController@postDangKy');
+Route::get('forget-password', 'backend\LoginController@quenMatKhau');
+Route::post('forget-password', 'backend\LoginController@postQuenMatKhau');
 //admin
 Route::group(['prefix' => 'admin','middleware'=>'CheckLogin'], function () {
     Route::get('', 'backend\IndexController@admin');
@@ -91,6 +93,11 @@ Route::group(['prefix' => 'admin','middleware'=>'CheckLogin'], function () {
     Route::group(['prefix' => 'order'], function () {
         Route::get('', 'backend\OrderController@donHang');
         Route::get('detail/{idDonHang}', 'backend\OrderController@ctDonHang');
+    });
+
+    //user
+    Route::group(['prefix' => 'user'], function () {
+
     });
 });
 

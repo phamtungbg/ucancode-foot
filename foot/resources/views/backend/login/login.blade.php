@@ -34,7 +34,16 @@
 									<input name="remember" type="checkbox" value="Remember Me">Remember Me
 								</label>
 							</div>
-							<button type="submit" class="btn btn-primary">Login</button>
+                            <div class="row">
+								<div class="col-md-4">
+									<button type="submit" class="btn btn-primary">Login</button>
+
+								</div>
+								<div class="col-md-8 text-right">
+									<a href="/register" class="btn btn-success">Đăng ký</a>
+									<a href="/forget-password" class="btn btn-danger">Quên mật khẩu</a>
+								</div>
+							</div>
 						</fieldset>
 					</form>
 				</div>
