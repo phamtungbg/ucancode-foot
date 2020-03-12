@@ -38,7 +38,7 @@ class LoginController extends Controller
     function postDangKy(RegisterRequest $r){
         $user = new User;
         $user->email=$r->email;
-        $user->password=$r->password;
+        $user->password=bcrypt($r->password);
         $user->ho_ten=$r->ho_ten;
         $user->quyen = 0;
         $user->trang_thai=0;
@@ -52,7 +52,24 @@ class LoginController extends Controller
     }
 
     function postQuenMatKhau(Request $r){
-       
+        $user = User::where('email',$r->email)->first();
+
+        if($user){
+            $password = Str::random(10);
+
+            $user->password =  bcrypt($password);
+            $user->save();
+            $data['password'] = $password;
+            Mail::send('backend.mail.mail', $data, function ($message) use ($user) {
+                $message->from('dkmcnm@gmail.com', 'UCANCODE vegefoot');
+                $message->to($user->email, 'Thành viên');
+                $message->subject('Lấy lại mật khẩu');
+
+            });
+            return redirect('forget-password')->with('thongBao','Password mới sẽ được gửi vào email đăng ký của bạn!');
+        }else{
+            return redirect('forget-password')->withErrors(['email'=>'email không tồn tại']);
+        }
 
     }
 }

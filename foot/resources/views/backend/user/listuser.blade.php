@@ -28,13 +28,16 @@
                 <div class="panel-body">
                     <div class="bootstrap-table">
                         <div class="table-responsive">
+                            @if (session('thongBao'))
                             <div class="alert bg-success" role="alert">
                                 <svg class="glyph stroked checkmark">
                                     <use xlink:href="#stroked-checkmark"></use>
-                                </svg>Đã thêm thành công<a href="#" class="pull-right"><span
+                                </svg>{{session('thongBao')}}<a href="#" class="pull-right"><span
                                         class="glyphicon glyphicon-remove"></span></a>
                             </div>
-                            <a href="register-user.html" class="btn btn-primary">Danh sách đăng ký</a>
+                            @endif
+
+                            <a href="/admin/user/register" class="btn btn-primary">Danh sách đăng ký</a>
                             <table class="table table-bordered" style="margin-top:20px;">
 
                                 <thead>
@@ -47,41 +50,28 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                    @foreach ($user as $item)
                                     <tr>
-                                        <td>1</td>
-                                        <td>Admin@gmail.com</td>
-                                        <td>Admin</td>
-                                        <td>admin</td>
+                                        <td>{{$item->id}}</td>
+                                        <td>{{$item->email}}</td>
+                                        <td>{{$item->ho_ten}}</td>
+                                        <td>{{$item->quyen}}</td>
                                         <td>
-                                            <a href="#" class="btn btn-warning"><i class="fa fa-pencil"
+                                        <a href="/admin/user/change-password/{{$item->id}}" class="btn btn-warning"><i class="fa fa-pencil"
                                                     aria-hidden="true"></i> Đổi mật khẩu</a>
-                                            <a href="#" class="btn btn-danger"><i class="fa fa-trash"
+                                            <a href="/admin/user/del/{{$item->id}}" class="btn btn-danger"><i class="fa fa-trash"
                                                     aria-hidden="true"></i> Xóa</a>
                                         </td>
                                     </tr>
+                                    @endforeach
 
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Admin@gmail.com</td>
-                                        <td>Admin</td>
-                                        <td>admin</td>
-                                        <td>
-                                            <a href="#" class="btn btn-warning"><i class="fa fa-pencil"
-                                                    aria-hidden="true"></i> Đổi mật khẩu</a>
-                                            <a href="#" class="btn btn-danger"><i class="fa fa-trash"
-                                                    aria-hidden="true"></i> Xóa</a>
-                                        </td>
-                                    </tr>
+
+
                                 </tbody>
                             </table>
                             <div align='right'>
                                 <ul class="pagination">
-                                    <li class="page-item"><a class="page-link" href="#">Trở lại</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">tiếp theo</a></li>
+                                    {{$user->links()}}
                                 </ul>
                             </div>
                         </div>

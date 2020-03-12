@@ -9,7 +9,7 @@
 <body>
     <div class="text-center">
     <h3>Mật khẩu của bạn đã được reset</h3>
-    <p><span class="font-weight-bold">Mật khẩu mới: </span>{{$user->password}}</p>
+    <p><span class="font-weight-bold">Mật khẩu mới: </span>{{$password}}</p>
 </div>
 </body>
 </html>

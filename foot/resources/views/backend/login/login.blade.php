@@ -18,6 +18,11 @@
 			<div class="login-panel panel panel-default">
 				<div class="panel-heading">Log in</div>
 				<div class="panel-body">
+                    @if (session('thongBao'))
+                <div class="alert alert-success" role="alert">
+                    <strong>{{session('thongBao')}}</strong>
+                </div>
+                @endif
 					<form role="form" method="POST">
                         @csrf
 						<fieldset>

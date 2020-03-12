@@ -16,22 +16,25 @@
                 <div class="panel-heading"><i class="fas fa-user"></i> Đổi mật khẩu</div>
                 <div class="panel-body">
                     <div class="row justify-content-center" style="margin-bottom:40px">
-
+                    <form method="post">
+                        @csrf
                         <div class="col-md-8 col-lg-8 col-lg-offset-2">
 
                             <div class="form-group">
                                 <label>Password</label>
                                 <input type="password" name="password" class="form-control" value="">
-
+                                {{hienLoi($errors,'password')}}
                             </div>
 
                             <div class="form-group">
                                 <label>Nhập lại Password</label>
                                 <input type="password" name="password_conf" class="form-control" value="">
+                                {{hienLoi($errors,'password_conf')}}
                             </div>
                             <div class="form-group">
                                 <label>Password mới</label>
                                 <input type="password" name="new_password" class="form-control" value="">
+                                {{hienLoi($errors,'new_password')}}
                             </div>
                         </div>
                         <div class="row">
@@ -42,7 +45,7 @@
                             </div>
 
                         </div>
-
+                    </form>
                     </div>
 
                     <div class="clearfix"></div>
